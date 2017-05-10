@@ -43,33 +43,29 @@
 #   LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 #   OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS WITH 
 #   THE SOFTWARE.
+#   
+from ConfigParser import SafeConfigParser
+import os
 
-class Location():
-
-	def __init__(self, x, y, z):
-		self.x = x
-		self.y = y
-		self.z = z 
-
-	def __init__(self, lat, lon, alt):
-		self.lat = lat
-		self.lon = lon
-		self.alt = alt
-
-	def getX(self):
-		return self.x
-
-	def getY(self):
-		return self.y
-
-	def getZ(self):
-		return self.z
-
-	def getLat(self):
-		return self.lat
-
-	def getLon(self):
-		return self.lon
-
-	def getAlt(self):
-		return self.alt
+def ReadConfig(file, section):
+	config = SafeConfigParser()
+	mydir = os.path.dirname(os.path.abspath(__file__))
+	path = os.path.join(os.getcwd(), file)
+	dict1 = {}
+	if os.path.isfile(path):
+		config.read(path)
+		if config.has_section(section):
+			options = config.options(section)
+			for option in options:
+				try:
+					dict1[option] = config.get(section, option)
+					if dict1[option] == -1:
+						print("Skip: %s" % option)
+				except:
+					print("Exception on %s" % option)
+					dict1[option] = None
+		else:
+			return {}
+	else:
+		print("Config file not found")
+	return dict1

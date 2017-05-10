@@ -44,32 +44,28 @@
 #   OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS WITH 
 #   THE SOFTWARE.
 
-class Location():
 
-	def __init__(self, x, y, z):
-		self.x = x
-		self.y = y
-		self.z = z 
+#!/usr/bin/env python
+from emanesh.events import EventService
+from emanesh.events import PathlossEvent
 
-	def __init__(self, lat, lon, alt):
-		self.lat = lat
-		self.lon = lon
-		self.alt = alt
+# create the event service
+service = EventService(('224.1.2.8',45703,'emanenode0'))
 
-	def getX(self):
-		return self.x
+# create an event setting the pathloss between 1 & 10
+event = PathlossEvent()
+event.append(1,forward=90)
+event.append(10,forward=90)
 
-	def getY(self):
-		return self.y
+# publish the event
+service.publish(1,event)
+service.publish(10,event)
 
-	def getZ(self):
-		return self.z
+# create an event setting the pathloss between 9 & 10
+event = PathlossEvent()
+event.append(9,forward=90)
+event.append(10,forward=90)
 
-	def getLat(self):
-		return self.lat
-
-	def getLon(self):
-		return self.lon
-
-	def getAlt(self):
-		return self.alt
+# publish the event
+service.publish(9,event)
+service.publish(10,event)

@@ -89,7 +89,7 @@ ENV/
 .ropeproject
 
 *.xml-dep
-*.xml
+*transportdaemon[0-9]*.xml
 *.conf
 *demo-start*
 *demo-stop*

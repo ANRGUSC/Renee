@@ -44,32 +44,17 @@
 #   OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS WITH 
 #   THE SOFTWARE.
 
-class Location():
+#!/usr/bin/env python
+from emanesh.events import EventService
+from emanesh.events import LocationEvent
 
-	def __init__(self, x, y, z):
-		self.x = x
-		self.y = y
-		self.z = z 
+# create the event service
+service = EventService(('224.1.2.8',45703,'emanenode0'))
 
-	def __init__(self, lat, lon, alt):
-		self.lat = lat
-		self.lon = lon
-		self.alt = alt
+# create an event setting 10's position
+event = LocationEvent()
+event.append(10,latitude=40.031290,longitude=-74.523095,altitude=3.000000)
 
-	def getX(self):
-		return self.x
+# publish the event
+service.publish(0,event)
 
-	def getY(self):
-		return self.y
-
-	def getZ(self):
-		return self.z
-
-	def getLat(self):
-		return self.lat
-
-	def getLon(self):
-		return self.lon
-
-	def getAlt(self):
-		return self.alt

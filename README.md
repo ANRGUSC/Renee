@@ -1,4 +1,4 @@
-# Robotic Wireless Network: RouteSwarm Emulator
+# Robotic Wireless Network: Renee Emulator
 -------------------
 
 ## Introduction
@@ -114,7 +114,7 @@ $ make
 10.100.0.9 radio-9
 10.100.0.10 radio-10
 ```
-Download and set up RouteSwarm emulator:
+Download and set up Renee emulator:
 
 1. Open Terminal
 2. Clone the repository into the desired directory
@@ -123,13 +123,13 @@ Download and set up RouteSwarm emulator:
 5. Replace the directory named `pynodestatviz` in `usr/lib/python2.7/dist-packages` with the directory named `pynodestatviz` in `cs401project`
 6. Open `LogCompiler.py` and change file path to the file path of `scenario.eel`
 7. Open `demo-start` and change file path to the file path of `emane-tutorial`
-8. Open `RouteSwarmScript.sh` and change file path to the file path of `emane-tutorial/0`
+8. Open `ReneeScript.sh` and change file path to the file path of `emane-tutorial/0`
 
 To run the simulator:
 1. Navigate to directory of `emane-tutorial/0`
 2. Enter command: `kill $(lsof -t -i:6666)`
 3. Enter command: `sudo ./demo-stop`
-4. Enter command: `./RouteSwarmScript.sh`
+4. Enter command: `./ReneeScript.sh`
 5. Wait about 30 seconds to observe activity in the GUI
 
 
@@ -159,7 +159,7 @@ fid = 001
 Note: you must have 1 [src] and 1 [dst], and 1 - 8 [R#] nodes
 where # is replaced with a number 1-8.
 
-Next, open `RouteSwarmScript.sh`. You will see the first 4 lines which set up EMANE, the GUI, and the LogCompiler. Lines 7-14 start up each node desired node container. Comment out the lines for nodes that you have not included in your swarm.cfg file. 
+Next, open `ReneeScript.sh`. You will see the first 4 lines which set up EMANE, the GUI, and the LogCompiler. Lines 7-14 start up each node desired node container. Comment out the lines for nodes that you have not included in your swarm.cfg file. 
 
 ### Motion Controller Configuration:
 To change the location that each node will move to, go into `Robot.py` and in the commController function, change the value of newLoc to be the new location you would like to move in the direction of.
@@ -289,17 +289,17 @@ position, LogCompiler writes the information to `scenario.eel`. EMANE then reads
 
 -----------------------------------------------------------------------
 ## Flow Diagram
-![alt text](https://github.com/ANRGUSC/RouteSwarm/blob/master/flow.png "flow")
+![alt text](https://github.com/ANRGUSC/Renee/blob/master/flow.png "flow")
 
 -------------------------------------------------------------------------
 ## Component Diagrams
 
-![alt text](https://github.com/ANRGUSC/RouteSwarm/blob/master/components.png "components")
+![alt text](https://github.com/ANRGUSC/Renee/blob/master/components.png "components")
 
 -------------------------------------------------------------------------
 ## Sequence Diagrams
 
-![alt text](https://github.com/ANRGUSC/RouteSwarm/blob/master/sequence.png "sequence")
+![alt text](https://github.com/ANRGUSC/Renee/blob/master/sequence.png "sequence")
 
 -------------------------------------------------------------------------
 ## Class/Method Descriptions
@@ -338,7 +338,7 @@ This class acts as an instance of a robot. Each Robot belongs to both a flow and
 finish setting up the Robot instance.
 -   **__main__ method :** Based on command line input, calls functions to initialize a Robot instance.
 
-### RouteSwarmScript.sh
+### ReneeScript.sh
 Shell script that will start the emulator. It starts EMANE, opens the GUI, and starts the LogCompiler (which writes location coordinates to the scenario.eel file which the GUI will read from), and then opens up a terminal for each node (number must be hard-coded prior runtime), sshs into a particular node IP on each terminal, and then and runs an instance of Robot on each.
 
 -------------------------------------------------------

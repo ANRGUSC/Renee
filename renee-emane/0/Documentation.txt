@@ -1,6 +1,0 @@
-Change frequency of visual updates:
-olsrlinkview.py > DisplayUpdate class > run(self) > *Change last line where time.sleep(0.5).
-
-
-Why nodes arent turning green and showing links:
-OLSRLinkView.py Run function. Pycurl perform() function fails, throws exception. If it was successful, it would get the links and shit, but because it fails, the exception code has the node set to invalid, with no links.
