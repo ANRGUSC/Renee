@@ -87,3 +87,10 @@ ENV/
 
 # Rope project settings
 .ropeproject
+
+*.xml-dep
+*.xml
+*.conf
+*demo-start*
+*demo-stop*
+*NO-*
