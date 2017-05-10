@@ -1,3 +1,5 @@
+#!/usr/bin/python
+
 #   Copyright (c) 2017, Autonomous Networks Research Group. All rights reserved.
 #   Developed by:
 #   Autonomous Networks Research Group (ANRG)
@@ -45,7 +47,6 @@
 #   THE SOFTWARE.
 
 
-#!/usr/bin/python
 
 ###### LogCompiler.py ######
 # Author: Jake Goodman & Jess Koe		#

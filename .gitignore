@@ -94,3 +94,9 @@ ENV/
 *demo-start*
 *demo-stop*
 *NO-*
+*eventdaemon*.xml
+*gpsdlocationagent*.xml
+*otestpoint-recorder*.xml
+*otestpointd*.xml
+*platform*.xml
+

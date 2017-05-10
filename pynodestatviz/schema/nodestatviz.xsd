@@ -1,0 +1,167 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<!--
+ Copyright (c) 2012 - DRS CenGen, LLC, Columbia, Maryland
+ All rights reserved.
+
+ Redistribution and use in source and binary forms, with or without
+ modification, are permitted provided that the following conditions
+ are met:
+
+ * Redistributions of source code must retain the above copyright
+   notice, this list of conditions and the following disclaimer.
+ * Redistributions in binary form must reproduce the above copyright
+   notice, this list of conditions and the following disclaimer in
+   the documentation and/or other materials provided with the
+   distribution.
+ * Neither the name of DRS CenGen, LLC nor the names of its
+   contributors may be used to endorse or promote products derived
+   from this software without specific prior written permission.
+
+ THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS
+ "AS IS" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT
+ LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS
+ FOR A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL THE
+ COPYRIGHT OWNER OR CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT,
+ INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING,
+ BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES;
+ LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER
+ CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT
+ LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN
+ ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE
+ POSSIBILITY OF SUCH DAMAGE.
+-->
+<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema'>
+
+  <xs:simpleType name='YesNo'>
+    <xs:restriction base='xs:token'>
+      <xs:enumeration value='yes' />
+      <xs:enumeration value='no' />
+    </xs:restriction>
+  </xs:simpleType>
+  
+  <xs:simpleType name='Color'>
+    <xs:restriction base='xs:token'>
+      <xs:enumeration value='black'/>
+      <xs:enumeration value='red'/>
+      <xs:enumeration value='dark red'/>
+      <xs:enumeration value='green'/>
+      <xs:enumeration value='light green'/>
+      <xs:enumeration value='dark green'/>
+      <xs:enumeration value='blue'/>
+      <xs:enumeration value='light blue'/>
+      <xs:enumeration value='dark blue'/>
+      <xs:enumeration value='yellow'/>
+      <xs:enumeration value='white'/>
+      <xs:enumeration value='gray'/>
+      <xs:enumeration value='light gray'/>
+      <xs:enumeration value='dark gray'/>
+    </xs:restriction>
+  </xs:simpleType>
+
+  <xs:simpleType name='Style'>
+    <xs:restriction base='xs:token'>
+      <xs:enumeration value='solid'/>
+      <xs:enumeration value='solid_to_dash'/>
+      <xs:enumeration value='dash_to_solid'/>
+      <xs:enumeration value='dash'/>
+    </xs:restriction>
+  </xs:simpleType>
+  
+  <xs:element name='nodestatviz'>
+    <xs:complexType>
+      <xs:sequence>
+        
+        <xs:element name='title' minOccurs='0' maxOccurs='1'>
+          <xs:complexType>
+            <xs:attribute name='text' type='xs:string' use='optional'/>
+          </xs:complexType>
+        </xs:element>
+        
+        <xs:element name='nodes' minOccurs='0' maxOccurs='1'>
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element name='node' minOccurs='0' maxOccurs='unbounded'>
+                <xs:complexType>
+                  <xs:attribute name='name' type='xs:string' use='required'/>
+                  <xs:attribute name='color' type='Color' default='black' use='optional'/>
+                  <xs:attribute name='x' type='xs:string' use='optional'/>
+                  <xs:attribute name='y' type='xs:string' use='optional'/>
+                </xs:complexType>
+              </xs:element>
+            </xs:sequence>
+          </xs:complexType>
+            <xs:unique name="NodeNameUniqueness">
+              <xs:selector xpath=".//node"/>
+              <xs:field xpath="@name"/>
+            </xs:unique>
+        </xs:element>
+
+        <xs:element name='edges' minOccurs='0' maxOccurs='1'>
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element name='edge' minOccurs='0' maxOccurs='unbounded'>
+                <xs:complexType>
+                  <xs:attribute name='src' type='xs:string' use='required'/>
+                  <xs:attribute name='dst' type='xs:string' use='required'/>
+                  <xs:attribute name='color' type='Color' default='black' use='optional'/>
+                  <xs:attribute name='color2' type='Color' use='optional'/>
+                  <xs:attribute name='style' type='Style' default='solid' use='optional'/>
+                </xs:complexType>
+              </xs:element>
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+
+        <xs:element name='table' minOccurs='0' maxOccurs='1'>
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element name='header' minOccurs='1' maxOccurs='1'>
+                <xs:complexType>
+                  <xs:sequence>
+                    <xs:element name='column' minOccurs='0' maxOccurs='unbounded'>
+                      <xs:complexType>
+                        <xs:attribute name='text' type='xs:string' use='required'/>
+                        <xs:attribute name='width' type='xs:unsignedInt' default='15' use='optional'/>                    
+                        <xs:attribute name='foreground' type='Color' default='black' use='optional'/>
+                        <xs:attribute name='background' type='Color' default='light gray' use='optional'/>
+  
+                      </xs:complexType>
+                    </xs:element>
+                  </xs:sequence>
+                </xs:complexType>
+              </xs:element>
+              <xs:element name='rows' minOccurs='1' maxOccurs='1'>
+                <xs:complexType>
+                  <xs:sequence>
+                    <xs:element name='row' minOccurs='0' maxOccurs='unbounded'>
+                      <xs:complexType>
+                        <xs:sequence>
+                          <xs:element name='column' minOccurs='0' maxOccurs='unbounded'>
+                            <xs:complexType>
+                              <xs:attribute name='text' type='xs:string' use='required'/>
+                              <xs:attribute name='foreground' type='Color' default='black' use='optional'/>
+                              <xs:attribute name='background' type='Color' default='white' use='optional'/>
+                            </xs:complexType>
+                          </xs:element>
+                        </xs:sequence>
+                      </xs:complexType>
+                    </xs:element>
+                  </xs:sequence>
+                </xs:complexType>
+              </xs:element>
+            </xs:sequence> 
+            <xs:attribute name='title' type='xs:string' default="" use='optional'/>
+          </xs:complexType>
+        </xs:element>
+        
+        <xs:element name='status' minOccurs='0' maxOccurs='1'>
+          <xs:complexType>
+            <xs:attribute name='text' type='xs:string' use='optional'/>
+          </xs:complexType>
+        </xs:element>
+
+      </xs:sequence>
+      <xs:attribute name='clear' type='YesNo' default='no' use='optional'/>
+    </xs:complexType>
+  </xs:element>
+</xs:schema>
