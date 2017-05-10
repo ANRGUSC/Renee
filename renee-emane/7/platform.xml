@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE platform SYSTEM "file:///usr/share/emane/dtd/platform.dtd">
+<platform>
+  <param name="otamanagerchannelenable" value="off"/>
+  <param name="eventservicegroup" value="224.1.2.8:45703"/>
+  <param name="eventservicedevice" value="lo"/>
+  <param name="controlportendpoint" value="0.0.0.0:47000"/>
+
+  <nem id="1" definition="commeffectnem.xml">
+    <transport definition="transraw.xml">
+      <param name="device" value="veth1.2"/>
+    </transport>
+  </nem>
+
+  <nem id="2" definition="commeffectnem.xml">
+    <transport definition="transraw.xml">
+      <param name="device" value="veth2.2"/>
+    </transport>
+  </nem>
+
+
+  <nem id="3" definition="commeffectnem.xml">
+    <transport definition="transraw.xml">
+      <param name="device" value="veth3.2"/>
+    </transport>
+  </nem>
+
+  <nem id="4" definition="commeffectnem.xml">
+    <transport definition="transraw.xml">
+      <param name="device" value="veth4.2"/>
+    </transport>
+  </nem>
+
+  <nem id="5" definition="commeffectnem.xml">
+    <transport definition="transraw.xml">
+      <param name="device" value="veth5.2"/>
+    </transport>
+  </nem>
+
+  <nem id="6" definition="commeffectnem.xml">
+    <transport definition="transraw.xml">
+      <param name="device" value="veth6.2"/>
+    </transport>
+  </nem>
+
+  <nem id="7" definition="commeffectnem.xml">
+    <transport definition="transraw.xml">
+      <param name="device" value="veth7.2"/>
+    </transport>
+  </nem>
+
+  <nem id="8" definition="commeffectnem.xml">
+    <transport definition="transraw.xml">
+      <param name="device" value="veth8.2"/>
+    </transport>
+  </nem>
+
+  <nem id="9" definition="commeffectnem.xml">
+    <transport definition="transraw.xml">
+      <param name="device" value="veth9.2"/>
+    </transport>
+  </nem>
+
+  <nem id="10" definition="commeffectnem.xml">
+    <transport definition="transraw.xml">
+      <param name="device" value="veth10.2"/>
+    </transport>
+  </nem>
+
+</platform>

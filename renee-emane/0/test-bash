@@ -1,0 +1,4 @@
+#! /bin/bash
+
+sudo ./demo-start
+../scripts/olsrlinkview.py &

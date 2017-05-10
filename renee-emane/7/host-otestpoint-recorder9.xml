@@ -1,0 +1,4 @@
+<?xml version='1.0' encoding='UTF-8' standalone='yes'?>
+<otestpoint-recorder file="persist/host/var/log/otestpoint-recorder9.data">
+  <testpoint publish="localhost:8899"/>
+</otestpoint-recorder>

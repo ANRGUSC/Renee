@@ -1,0 +1,8 @@
+<otestpoint id="node-10" discovery="localhost:8890" publish="localhost:8900">
+  <probe configuration="probe-emane-commeffect10.xml">
+    <python module="otestpoint.emane.commeffect" class="CommEffect"/>
+  </probe>
+   <probe configuration="probe-emane-rawtransport10.xml">
+     <python module="otestpoint.emane.rawtransport" class="RawTransport"/>
+   </probe>
+</otestpoint>

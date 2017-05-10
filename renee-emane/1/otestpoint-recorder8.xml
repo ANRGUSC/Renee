@@ -1,0 +1,4 @@
+<?xml version='1.0' encoding='UTF-8' standalone='yes'?>
+<otestpoint-recorder file="persist/8/var/log/otestpoint-recorder.data">
+  <testpoint publish="node-8:8882"/>
+</otestpoint-recorder>

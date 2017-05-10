@@ -1,0 +1,3 @@
+#!/bin/bash -
+
+../scripts/democtl-host stop "$@" "/home/emane/emane-tutorial" 2 7

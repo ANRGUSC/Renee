@@ -1,0 +1,8 @@
+<otestpoint id="node-3" discovery="localhost:8883" publish="localhost:8893">
+  <probe configuration="probe-emane-physicallayer3.xml">
+    <python module="otestpoint.emane.physicallayer" class="PhysicalLayer"/>
+  </probe>
+   <probe configuration="probe-emane-rfpipe3.xml">
+     <python module="otestpoint.emane.rfpipe" class="RFPipe"/>
+   </probe>
+</otestpoint>
