@@ -48,6 +48,8 @@ sudo sh ./route-swarm-stop.sh
 2. To download Python 2.7, enter the command: `sudo apt-get install python2.7`
 3. To download the networkx Python library, enter the command: `pip install networkx`
 
+Setup the sshd config properly
+
 #### Download and set up EMANE framework:
 
 If the below instructions do not work, here are the links to where the directions are:
@@ -68,15 +70,18 @@ $ cd ~
 ```
 3. Install Necessary Packages: 
 ```shell
-$ sudo apt-get install lxc bridge-utils mgen fping gpsd gpsd-clients iperf multitail olsrd openssh-server python-tk python-pmw python-lxml python-stdeb build-essential
+$ sudo apt-get install python-pip libcurl4-gnutls-dev librtmp-dev lxc bridge-utils mgen fping gpsd gpsd-clients iperf multitail olsrd openssh-server python-tk python-pmw python-lxml python-stdeb build-essential
 ```
 Or,
 ```shell
 $ sudo yum install lxc bridge-utils fping gpsd gpsd-clients iperf multitail openssh-server tkinter python-pmw python-lxml
 ```
+Install pycurl
+
+
 4. Install pynodestatviz
 ```shell
-$ git clone https://github.com/adjacentlink/pynodestatviz
+$ git clone git@github.com:ANRGUSC/pynodestatviz.git
 $ cd pynodestatviz
 $ make deb
 $ sudo dpkg -i deb_dist/pynodestatviz*.deb
@@ -86,7 +91,7 @@ $ cd ~
 ```shell
 $ git clone git@github.com:ANRGUSC/Renee.git
 $ cd Renee
-$ sudo cp -f pynodestatviz/* /usr/lib/python2.7/dist-packages/pynodestatviz/
+$ pip install -r requirements.txt
 $ cd renee-emane
 $ make
 ```
