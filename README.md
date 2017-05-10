@@ -62,11 +62,12 @@ If the below instructions do not work, here are the links to where the direction
 ```shell
 $ tar zxvf emane-1.0.1-release-1.ubuntu-16_04.amd64.tar.gz 
 $ cd emane-1.0.1-release-1/debs/ubuntu-16_04/amd64
-$ dpkg -i *.deb
-$ apt-get install -f
+$ sudo dpkg -i *.deb
+$ sudo apt-get install -f
+$ cd ~
 ```
 3. Install Necessary Packages: 
-``shell
+```shell
 $ sudo apt-get install lxc bridge-utils mgen fping gpsd gpsd-clients iperf multitail olsrd openssh-server python-tk python-pmw python-lxml python-stdeb build-essential
 ```
 Or,
@@ -79,13 +80,13 @@ $ git clone https://github.com/adjacentlink/pynodestatviz
 $ cd pynodestatviz
 $ make deb
 $ sudo dpkg -i deb_dist/pynodestatviz*.deb
+$ cd ~
 ```
 5. Clone our code and replace `pynodestatviz` in `usr/lib/python2.7/dist-packages` with the directory named `pynodestatviz`
 ```shell
 $ git clone git@github.com:ANRGUSC/Renee.git
 $ cd Renee
-$ sudo rm -rf usr/lib/python2.7/dist-packages/pynodestatviz
-$ sudo cp -r pynodestatviz usr/lib/python2.7/dist-packages/
+$ sudo cp -f pynodestatviz/* /usr/lib/python2.7/dist-packages/pynodestatviz/
 $ cd renee-emane
 $ make
 ```
@@ -114,23 +115,14 @@ $ make
 10.100.0.9 radio-9
 10.100.0.10 radio-10
 ```
-Download and set up Renee emulator:
 
-1. Open Terminal
-2. Clone the repository into the desired directory
-3. Replace the directory named `0` in emane-tutorial with the directory named `0` in `cs401project`
-4. Replace the directory named `scripts` in emane-tutorial with the directory named `scripts` in `cs401project`
-5. Replace the directory named `pynodestatviz` in `usr/lib/python2.7/dist-packages` with the directory named `pynodestatviz` in `cs401project`
-6. Open `LogCompiler.py` and change file path to the file path of `scenario.eel`
-7. Open `demo-start` and change file path to the file path of `emane-tutorial`
-8. Open `ReneeScript.sh` and change file path to the file path of `emane-tutorial/0`
-
-To run the simulator:
+##### To run the simulator:
 1. Navigate to directory of `emane-tutorial/0`
 2. Enter command: `kill $(lsof -t -i:6666)`
 3. Enter command: `sudo ./demo-stop`
-4. Enter command: `./ReneeScript.sh`
+4. Enter command: `sudo ./renee-start.sh`
 5. Wait about 30 seconds to observe activity in the GUI
+6. To Stop Enter command: `sudo ./renee-stop.sh`
 
 
 -------------------------------------------------------------------------------
