@@ -96,7 +96,7 @@ $ cd ~
 5. Clone our code and replace `pynodestatviz` in `usr/lib/python2.7/dist-packages` with the directory named `pynodestatviz`
 ```shell
 $ git clone git@github.com:ANRGUSC/Renee.git
-$ cd Renee/renee-emane
+$ cd Renee/1
 $ make
 ```
 

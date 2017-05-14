@@ -1,6 +1,6 @@
 TOP_DIR=..
 
-DEMO_ID=renee-emane
+DEMO_ID=1
 
 NEM_XML=rfpipenem.xml
 
