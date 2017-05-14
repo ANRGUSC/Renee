@@ -44,16 +44,18 @@ sudo sh ./route-swarm-stop.sh
 ### Manual virtual machine installation (not recommended):
 
 #### Preliminary Setup:
-1. If you are not running Linux, download a Linux/Ubuntu 14.04 virtual machine
-2. To download Python 2.7, enter the command: `sudo apt-get install python2.7`
-3. To download the networkx Python library, enter the command: `pip install networkx`
-4. Setup the sshd config properly:
+1. If you are not running Linux, download a Linux/Ubuntu 14.04/16.04 virtual machine
+2. Install git, enter the command: `sudo apt-get install git`
+3. To download Python 2.7, enter the command: `sudo apt-get install python2.7 python-pip`
+4. To download the networkx Python library, enter the command: `pip install networkx`
+5. Setup the sshd config properly:
 ```shell
 $ mkdir ~/.ssh
 $ chmod 700 ~/.ssh
 $ ssh-keygen -t rsa
 $ cd ~/.ssh
 $ cat id_rsa.pub  >> authorized_keys
+$ cd ~
 ```
 
 #### Download and set up EMANE framework:
@@ -64,25 +66,27 @@ If the below instructions do not work, here are the links to where the direction
 2. https://github.com/adjacentlink/emane/wiki/Install#ubuntu-1604-lts-amd64
 
 #### Directions:
-1. Type this into terminal: 
+
+1. Install Necessary Packages: 
+```shell
+$ sudo apt-get update
+$ sudo apt-get install libcurl4-gnutls-dev librtmp-dev lxc bridge-utils mgen fping gpsd gpsd-clients iperf multitail olsrd openssh-server python-tk python-pmw python-lxml python-stdeb build-essential python-pycurl
+```
+Or,
+```shell
+$ sudo yum install lxc bridge-utils fping gpsd gpsd-clients iperf multitail openssh-server tkinter python-pmw python-lxml
+```
+
+
+2. Type this into terminal: 
 `wget https://adjacentlink.com/downloads/emane/emane-1.0.1-release-1.ubuntu-16_04.amd64.tar.gz`
-2. Then type:
+3. Then type:
 ```shell
 $ tar zxvf emane-1.0.1-release-1.ubuntu-16_04.amd64.tar.gz 
 $ cd emane-1.0.1-release-1/debs/ubuntu-16_04/amd64
 $ sudo dpkg -i *.deb
 $ sudo apt-get install -f
 $ cd ~
-```
-3. Install Necessary Packages: 
-```shell
-$ sudo apt-get update
-$ sudo apt-get upgrade
-$ sudo apt-get install python-pip libcurl4-gnutls-dev librtmp-dev lxc bridge-utils mgen fping gpsd gpsd-clients iperf multitail olsrd openssh-server python-tk python-pmw python-lxml python-stdeb build-essential python-pycurl
-```
-Or,
-```shell
-$ sudo yum install lxc bridge-utils fping gpsd gpsd-clients iperf multitail openssh-server tkinter python-pmw python-lxml
 ```
 
 4. Install pynodestatviz
@@ -93,7 +97,7 @@ $ make deb
 $ sudo dpkg -i deb_dist/pynodestatviz*.deb
 $ cd ~
 ```
-5. Clone our code and replace `pynodestatviz` in `usr/lib/python2.7/dist-packages` with the directory named `pynodestatviz`
+5. Clone our code
 ```shell
 $ git clone git@github.com:ANRGUSC/Renee.git
 $ cd Renee/1
@@ -126,9 +130,9 @@ $ make
 ```
 
 ##### To run the simulator:
-1. Enter command: `sudo ./renee-start.sh`
+1. Enter command: `./renee-start.sh`
 2. Wait about 30 seconds to observe activity in the GUI
-3. To Stop Enter command: `sudo ./renee-stop.sh`
+3. To Stop Enter command: `./renee-stop.sh`
 
 Note: In the First time, you might have to manually enter "Yes" in each of the opened xterm to enter the ssh key into known-hosts file.
 
