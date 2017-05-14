@@ -248,11 +248,11 @@ case "$1" in
         demoid=$2
         nodecount=$3
 
-        if [[ $demoid != +([0-9]) ]]
-        then
-            echo "Invalid demo id: $demoid" >&2
-            exit 1
-        fi
+        # if [[ $demoid != +([0-9]) ]]
+        # then
+        #     echo "Invalid demo id: $demoid" >&2
+        #     exit 1
+        # fi
 
         if [[ $nodecount != +([0-9]) ]]
         then
@@ -472,11 +472,11 @@ EOF
         demoid=$2
         nodecount=$3
 
-        if [[ $demoid != +([0-9]) ]]
-        then
-            echo "Invalid demo id: $demoid" >&2
-            exit 1
-        fi
+        # if [[ $demoid != +([0-9]) ]]
+        # then
+        #     echo "Invalid demo id: $demoid" >&2
+        #     exit 1
+        # fi
 
         if [[ $nodecount != +([0-9]) ]]
         then

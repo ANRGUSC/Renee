@@ -1,6 +1,6 @@
 TOP_DIR=..
 
-DEMO_ID=1
+DEMO_ID=renee-emane
 
 NEM_XML=rfpipenem.xml
 
@@ -83,8 +83,7 @@ GENERATED_OTESTPOINTRECORDERS= \
 NO-%:
 	touch $@
 
-GENERATED_EXTRA=           \
- NO-host-emaneeventservice 
+GENERATED_EXTRA=
 
 include ../rules.mk
 

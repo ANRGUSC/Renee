@@ -99,4 +99,5 @@ ENV/
 *otestpoint-recorder*.xml
 *otestpointd*.xml
 *platform*.xml
-
+persist/
+*.conf

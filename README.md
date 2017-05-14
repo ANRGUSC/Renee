@@ -47,8 +47,14 @@ sudo sh ./route-swarm-stop.sh
 1. If you are not running Linux, download a Linux/Ubuntu 14.04 virtual machine
 2. To download Python 2.7, enter the command: `sudo apt-get install python2.7`
 3. To download the networkx Python library, enter the command: `pip install networkx`
-
-Setup the sshd config properly
+4. Setup the sshd config properly:
+```shell
+$ mkdir ~/.ssh
+$ chmod 700 ~/.ssh
+$ ssh-keygen -t rsa
+$ cd ~/.ssh
+$ cat id_rsa.pub  >> authorized_keys
+```
 
 #### Download and set up EMANE framework:
 
@@ -70,14 +76,14 @@ $ cd ~
 ```
 3. Install Necessary Packages: 
 ```shell
-$ sudo apt-get install python-pip libcurl4-gnutls-dev librtmp-dev lxc bridge-utils mgen fping gpsd gpsd-clients iperf multitail olsrd openssh-server python-tk python-pmw python-lxml python-stdeb build-essential
+$ sudo apt-get update
+$ sudo apt-get upgrade
+$ sudo apt-get install python-pip libcurl4-gnutls-dev librtmp-dev lxc bridge-utils mgen fping gpsd gpsd-clients iperf multitail olsrd openssh-server python-tk python-pmw python-lxml python-stdeb build-essential python-pycurl
 ```
 Or,
 ```shell
 $ sudo yum install lxc bridge-utils fping gpsd gpsd-clients iperf multitail openssh-server tkinter python-pmw python-lxml
 ```
-Install pycurl
-
 
 4. Install pynodestatviz
 ```shell
@@ -90,9 +96,7 @@ $ cd ~
 5. Clone our code and replace `pynodestatviz` in `usr/lib/python2.7/dist-packages` with the directory named `pynodestatviz`
 ```shell
 $ git clone git@github.com:ANRGUSC/Renee.git
-$ cd Renee
-$ pip install -r requirements.txt
-$ cd renee-emane
+$ cd Renee/renee-emane
 $ make
 ```
 
@@ -122,13 +126,11 @@ $ make
 ```
 
 ##### To run the simulator:
-1. Navigate to directory of `emane-tutorial/0`
-2. Enter command: `kill $(lsof -t -i:6666)`
-3. Enter command: `sudo ./demo-stop`
-4. Enter command: `sudo ./renee-start.sh`
-5. Wait about 30 seconds to observe activity in the GUI
-6. To Stop Enter command: `sudo ./renee-stop.sh`
+1. Enter command: `sudo ./renee-start.sh`
+2. Wait about 30 seconds to observe activity in the GUI
+3. To Stop Enter command: `sudo ./renee-stop.sh`
 
+Note: In the First time, you might have to manually enter "Yes" in each of the opened xterm to enter the ssh key into known-hosts file.
 
 -------------------------------------------------------------------------------
 ## Configuring Emulation
@@ -156,7 +158,7 @@ fid = 001
 Note: you must have 1 [src] and 1 [dst], and 1 - 8 [R#] nodes
 where # is replaced with a number 1-8.
 
-Next, open `ReneeScript.sh`. You will see the first 4 lines which set up EMANE, the GUI, and the LogCompiler. Lines 7-14 start up each node desired node container. Comment out the lines for nodes that you have not included in your swarm.cfg file. 
+Next, open `renee-start.sh`. You will see the first 4 lines which set up EMANE, the GUI, and the LogCompiler. Lines 7-14 start up each node desired node container. Comment out the lines for nodes that you have not included in your swarm.cfg file. 
 
 ### Motion Controller Configuration:
 To change the location that each node will move to, go into `Robot.py` and in the commController function, change the value of newLoc to be the new location you would like to move in the direction of.

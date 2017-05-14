@@ -1,3 +1,5 @@
+#!/bin/bash
+
 #   Copyright (c) 2017, Autonomous Networks Research Group. All rights reserved.
 #   Developed by:
 #   Autonomous Networks Research Group (ANRG)
@@ -45,8 +47,8 @@
 #   THE SOFTWARE.
 #   
 
-#!/bin/bash
 
 sudo pkill xterm
 sudo pkill python
 sudo ./demo-stop
+sudo kill $(ps aux | grep 'LogCompiler.py' | awk '{print $2}')
