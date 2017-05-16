@@ -1,4 +1,4 @@
-# Robotic Wireless Network: Renee Emulator
+# Renee: Robotic Wireless Network Emulator
 -------------------
 
 ## Introduction
@@ -8,7 +8,8 @@ locations of other nodes in the network and calculate where the node should move
 ## Setup Instructions
 
 ### Setting up the pre-configured virtual machine (recommended): 
-1. Download VirtualBox Manager and the CentOS EMANE Demo Virtual Machine from https://drive.google.com/a/usc.edu/file/d/0B5ViCEcBphtIMzhkRUpJR3Vab3c/view?usp=sharing.
+1. Download VirtualBox Manager and the CentOS EMANE Demo Virtual Machine from
+https://drive.google.com/file/d/0B5ViCEcBphtIMzhkRUpJR3Vab3c/view?usp=sharing
 2. Open VirtualBox Manager. 
 3. Under the File Tab, select Import Appliance. 
 4. Find where the EMANE Demo Virtual Machine is located on your computer and select it. It should appear in VirtualBox Manager. 
@@ -27,18 +28,18 @@ If VirtualBox Manager gives you an error, follow the workaround below (adapted f
 
 
 
-In the terminal, navigate to the folder `emane-tutorial/route-swarm`.
-Run the `route-swarm-start.sh` script in the terminal to start the
+In the terminal, navigate to the folder `Renee/1`.
+Run the `renee-start.sh` script in the terminal to start the
 emulation (both the scripts and the GUI):
 ```shell
-cd emane-tutorial/route-swarm
-sudo sh ./route-swarm-start.sh
+$ cd Renee/1
+$ make
+$ ./renee-start.sh
 ```
-Note: sudo is required for all nodes to run properly.
 When you are ready to end the emulation, use the route-swarm-stop.sh
 command in the host terminal:
 ```shell
-sudo sh ./route-swarm-stop.sh
+renee-stop.sh
 ```
 --------------------------------------------------------------
 ### Manual virtual machine installation (not recommended):
@@ -62,8 +63,8 @@ $ cd ~
 
 If the below instructions do not work, here are the links to where the directions are:
 1. https://github.com/adjacentlink/emane/wiki/Install
-1. https://github.com/adjacentlink/emane/wiki/Install#ubuntu-1404-lts-amd64
-2. https://github.com/adjacentlink/emane/wiki/Install#ubuntu-1604-lts-amd64
+2. https://github.com/adjacentlink/emane/wiki/Install#ubuntu-1404-lts-amd64
+3. https://github.com/adjacentlink/emane/wiki/Install#ubuntu-1604-lts-amd64
 
 #### Directions:
 
@@ -79,11 +80,11 @@ $ sudo yum install lxc bridge-utils fping gpsd gpsd-clients iperf multitail open
 
 
 2. Type this into terminal: 
-`wget https://adjacentlink.com/downloads/emane/emane-1.0.1-release-1.ubuntu-16_04.amd64.tar.gz`
+`wget https://adjacentlink.com/downloads/emane/emane-1.0.1-release-1.ubuntu-14_04.amd64.tar.gz`
 3. Then type:
 ```shell
-$ tar zxvf emane-1.0.1-release-1.ubuntu-16_04.amd64.tar.gz 
-$ cd emane-1.0.1-release-1/debs/ubuntu-16_04/amd64
+$ tar zxvf emane-1.0.1-release-1.ubuntu-14_04.amd64.tar.gz  
+$ cd emane-1.0.1-release-1/debs/ubuntu-14_04/amd64
 $ sudo dpkg -i *.deb
 $ sudo apt-get install -f
 $ cd ~
@@ -91,7 +92,7 @@ $ cd ~
 
 4. Install pynodestatviz
 ```shell
-$ git clone git@github.com:ANRGUSC/pynodestatviz.git
+$ git clone https://github.com/ANRGUSC/pynodestatviz.git
 $ cd pynodestatviz
 $ make deb
 $ sudo dpkg -i deb_dist/pynodestatviz*.deb
