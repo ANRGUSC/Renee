@@ -5,6 +5,8 @@
 The goal of this project was to build an emulation and visualization tool which can display several robots in a network flow. We accomplished this by using EMANE, a tool used to simulate a network and Linux containers within the network. Each Linux container runs an instance of Robot to behave as a node in the network, which uses an instance of Graph to track the
 locations of other nodes in the network and calculate where the node should move to line up in its flow.
 
+A video demo of Renee can be found in https://youtu.be/it0E_B7iWnM
+
 ## Setup Instructions
 
 ### Setting up the pre-configured virtual machine (recommended): 
