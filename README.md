@@ -295,17 +295,17 @@ position, LogCompiler writes the information to `scenario.eel`. EMANE then reads
 
 -----------------------------------------------------------------------
 ## Flow Diagram
-![alt text](https://github.com/ANRGUSC/Renee/blob/master/flow.png "flow")
+![alt text](flow.png "flow")
 
 -------------------------------------------------------------------------
 ## Component Diagrams
 
-![alt text](https://github.com/ANRGUSC/Renee/blob/master/components.png "components")
+![alt text](components.png "components")
 
 -------------------------------------------------------------------------
 ## Sequence Diagrams
 
-![alt text](https://github.com/ANRGUSC/Renee/blob/master/sequence.png "sequence")
+![alt text](sequence.png "sequence")
 
 -------------------------------------------------------------------------
 ## Class/Method Descriptions
@@ -359,7 +359,7 @@ The left side of the olsrlinkview GUI displays the nodes and their relative posi
 
 
 ## Pathloss & The Physical Layer Model
-Information compiled from​ ​ AdjacentLink Documentation: https://github.com/adjacentlink/emane/wiki/Physical-Layer-Model
+Information compiled from AdjacentLink Documentation: https://github.com/adjacentlink/emane/wiki/Physical-Layer-Model
 
 ### Pathloss:
 For each received packet, the physical layer computes the receiver power associated with that packet, and if the rxPower
