@@ -85,29 +85,24 @@ $ sudo yum install lxc bridge-utils fping gpsd gpsd-clients iperf multitail open
 `wget https://adjacentlink.com/downloads/emane/emane-1.0.1-release-1.ubuntu-14_04.amd64.tar.gz`
 3. Then type:
 ```shell
-$ tar zxvf emane-1.0.1-release-1.ubuntu-14_04.amd64.tar.gz  
+$ tar zxvf emane-1.0.1-release-1.ubuntu-14_04.amd64.tar.gz 
 $ cd emane-1.0.1-release-1/debs/ubuntu-14_04/amd64
 $ sudo dpkg -i *.deb
 $ sudo apt-get install -f
 $ cd ~
 ```
 
-4. Install pynodestatviz
-```shell
-$ git clone https://github.com/ANRGUSC/pynodestatviz.git
-$ cd pynodestatviz
-$ make deb
-$ sudo dpkg -i deb_dist/pynodestatviz*.deb
-$ cd ~
-```
-5. Clone our code
+4. Clone our code
 ```shell
 $ git clone git@github.com:ANRGUSC/Renee.git
-$ cd Renee/1
+$ cd Renee/pynodestatviz
+$ make deb
+$ sudo dpkg -i deb_dist/pynodestatviz*.deb
+$ cd ../1
 $ make
 ```
 
-6. (demo only) To setup demo update your /etc/hosts file to include the following:
+5. (demo only) To setup demo update your /etc/hosts file to include the following:
 ```shell
 10.99.0.1 node-1
 10.99.0.2 node-2

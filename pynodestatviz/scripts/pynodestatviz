@@ -1,0 +1,165 @@
+#!/usr/bin/env python
+#
+# Copyright (c) 2014 - Adjacent Link LLC, Bridgewater, New Jersey
+# Copyright (c) 2012 - DRS CenGen, LLC, Columbia, Maryland
+# All rights reserved.
+#
+# Redistribution and use in source and binary forms, with or without
+# modification, are permitted provided that the following conditions
+# are met:
+#
+# * Redistributions of source code must retain the above copyright
+#   notice, this list of conditions and the following disclaimer.
+# * Redistributions in binary form must reproduce the above copyright
+#   notice, this list of conditions and the following disclaimer in
+#   the documentation and/or other materials provided with the
+#   distribution.
+# * Neither the name of DRS CenGen, LLC nor the names of its
+#   contributors may be used to endorse or promote products derived
+#   from this software without specific prior written permission.
+#
+# THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS
+# "AS IS" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT
+# LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS
+# FOR A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL THE
+# COPYRIGHT OWNER OR CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT,
+# INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING,
+# BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES;
+# LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER
+# CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT
+# LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN
+# ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE
+# POSSIBILITY OF SUCH DAMAGE.
+#
+
+from optparse import OptionParser
+from pynodestatviz import NodeStatViz,RenderException
+import sys
+import SocketServer
+import threading
+import os
+
+class XMLStatusHandler(SocketServer.BaseRequestHandler):
+    def handle(self):
+        self._messageInProgress  = False
+        self._lengthInProgress   = False
+        self._messageBytesToRead = 0
+        self._message = None
+
+        data = self.request.recv(5)
+
+        while data and len(data):
+            if not self._messageInProgress:
+                # started to read message length
+                if self._lengthInProgress:
+
+                    if len(data) < 5 - len(self._message):
+
+                        self._message += data 
+
+                    else:
+                        bytesOfLengthRemaining = 5 - len(self._message)
+
+                        self._message += data[:bytesOfLengthRemaining]
+
+                        self._messageBytesToRead = int(self._message)
+
+                        self._lengthInProgress = False
+
+                        self._messageInProgress = True
+
+                        data = data[bytesOfLengthRemaining:]
+
+                # new message and we have at least the message length
+                elif len(data) >= 5:
+
+                    self._messageBytesToRead = int(data[0:5])
+
+                    data = data[5:]
+
+                    self._messageInProgress = True
+
+                # new message but we do not have the message length yet
+                else:
+                    if self._lengthInProgress:
+                        self._message += data
+                    else:
+                        self._message = data
+                        self._lengthInProgress = True
+
+            while self._messageInProgress:
+
+                if len(data) >= self._messageBytesToRead:
+                    if self._message:
+                        self._message += data[:self._messageBytesToRead]
+                    else:
+                        self._message = data[:self._messageBytesToRead]
+
+                    data = data[self._messageBytesToRead:]
+
+                    self._messageBytesToRead = 0
+
+                else:
+                    if self._message:
+                        self._message += data
+                    else:
+                        self._message = data
+
+                    self._messageBytesToRead -= len(data)    
+
+                    data = None
+
+                if not self._messageBytesToRead:
+                    
+                    try:
+                        self.server.renderEngine.update(self._message)
+                    except RenderException:
+                        break
+
+                    self._messageInProgress  = False
+                    self._lengthInProgress = False
+                    self._messageBytesToRead = 0
+                    self._message = None
+
+                data = self.request.recv(self._messageBytesToRead)
+
+            data = self.request.recv(5)
+
+class XMLStatusServer(SocketServer.TCPServer):
+    allow_reuse_address = True
+
+    def __init__(self, server_address, RequestHandlerClass,renderEngine):
+        SocketServer.TCPServer.__init__(self,server_address,RequestHandlerClass)
+        self.renderEngine = renderEngine
+
+usage = "%prog [OPTION]... "
+
+optionParser = OptionParser(usage=usage)
+
+optionParser.add_option("", 
+                        "--location",
+                        action="store",
+                        type="string",
+                        dest="locations",
+                        metavar="FILE",
+                        default=os.path.join(os.environ['HOME'],'.pynodestatviz-locations.xml'),
+                        help="File containing initial node screen locations [default: %default]")
+
+(options, args) = optionParser.parse_args()
+
+if len(args) != 0 :
+    print >> sys.stderr, "invalid number of arguments"
+    exit(1)
+
+
+app = NodeStatViz(options.locations)
+
+server = XMLStatusServer(('localhost',8081),XMLStatusHandler,app)
+
+thread = threading.Thread(target=server.serve_forever)
+
+thread.setDaemon(True)
+
+thread.start()
+
+app.mainloop()

@@ -1,0 +1,13 @@
+from distutils.core import setup
+
+setup(name='pynodestatviz',
+      version='@VERSION@',
+      description='Simple Node Link and Statistic Visualization Tool',
+      author='Adjacent Link LLC',
+      author_email='labs at adjacentlink dot com',
+      url="http://adjacentlink.com",
+      packages=['pynodestatviz'],
+      scripts = ['scripts/pynodestatviz'],
+      package_data={'pynodestatviz' :['schema/*.xsd']},
+      license = 'BSD'
+      )
